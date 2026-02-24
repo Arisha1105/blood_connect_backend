@@ -10,7 +10,7 @@ const startServer = async (): Promise<void> => {
   await connectDB();
 
   app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running on port ${port}.\nhttp://localhost:${port}`);
   });
 };
 
