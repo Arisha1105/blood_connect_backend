@@ -1,18 +1,22 @@
 import express, { ErrorRequestHandler, Request, Response } from "express";
 import authRoutes from "./routes/authRoutes";
+import userRoutes from "./routes/userRoutes";
+import eventRoutes from "./routes/eventRoutes";
 
 const app = express();
 
 app.use(express.json({ limit: "10kb" }));
 
 app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/events", eventRoutes);
 
 console.log("REGISTERED ROUTES:");
 
 app._router.stack.forEach((middleware: any) => {
   if (middleware.route) {
     console.log(`${Object.keys(middleware.route.methods)} ${middleware.route.path}`);
-  } 
+  }
   else if (middleware.name === "router") {
     middleware.handle.stack.forEach((handler: any) => {
       if (handler.route) {
